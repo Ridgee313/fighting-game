@@ -1,15 +1,29 @@
 // function to handle the collision of 2 rectangles
 // used for detecting the collision between the attack boxes
 function rectangularCollision({ rectangle1, rectangle2 }) {
-  return (
-    rectangle1.attackBox.position.x <=
-      rectangle2.position.x + rectangle2.width &&
-    rectangle1.attackBox.position.x + rectangle1.attackBox.width >=
-      rectangle2.position.x &&
-    rectangle1.attackBox.position.y + rectangle1.attackBox.height >=
-      rectangle2.position.y &&
-    rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
-  );
+  if (rectangle1.lastKey === 'd' || rectangle1.lastKey === 'ArrowRight') {
+    return (
+      rectangle1.attackBoxRight.position.x <=
+        rectangle2.position.x + rectangle2.width &&
+      rectangle1.attackBoxRight.position.x + rectangle1.attackBoxRight.width >=
+        rectangle2.position.x &&
+      rectangle1.attackBoxRight.position.y + rectangle1.attackBoxRight.height >=
+        rectangle2.position.y &&
+      rectangle1.attackBoxRight.position.y <=
+        rectangle2.position.y + rectangle2.height
+    );
+  } else if (rectangle1.lastKey === 'a' || rectangle1.lastKey === 'ArrowLeft') {
+    return (
+      rectangle1.attackBoxLeft.position.x <=
+        rectangle2.position.x + rectangle2.width &&
+      rectangle1.attackBoxLeft.position.x + rectangle1.attackBoxLeft.width >=
+        rectangle2.position.x &&
+      rectangle1.attackBoxLeft.position.y + rectangle1.attackBoxLeft.height >=
+        rectangle2.position.y &&
+      rectangle1.attackBoxLeft.position.y <=
+        rectangle2.position.y + rectangle2.height
+    );
+  }
 }
 
 // function to determine the winner

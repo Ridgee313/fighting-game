@@ -53,23 +53,53 @@ const player = new Fighter({
   },
   framesHold: 5,
   sprites: {
-    idle: { imageSrc: './img/samuraiMack/idle.png', framesMax: 8 },
-    run: { imageSrc: './img/samuraiMack/run.png', framesMax: 8 },
-    jump: { imageSrc: './img/samuraiMack/jump.png', framesMax: 2 },
-    fall: { imageSrc: './img/samuraiMack/fall.png', framesMax: 2 },
-    attack1: { imageSrc: './img/samuraiMack/attack1.png', framesMax: 6 },
-    attack2: { imageSrc: './img/samuraiMack/attack2.png', framesMax: 6 },
-    takeHit: {
+    idleRight: { imageSrc: './img/samuraiMack/idle.png', framesMax: 8 },
+    runRight: { imageSrc: './img/samuraiMack/run.png', framesMax: 8 },
+    jumpRight: { imageSrc: './img/samuraiMack/jump.png', framesMax: 2 },
+    fallRight: { imageSrc: './img/samuraiMack/fall.png', framesMax: 2 },
+    attack1Right: {
+      imageSrc: './img/samuraiMack/attack1.png',
+      framesMax: 6,
+    },
+    attack2Right: {
+      imageSrc: './img/samuraiMack/attack2.png',
+      framesMax: 6,
+    },
+    takeHitRight: {
       imageSrc: './img/samuraiMack/take hit - white silhouette.png',
       framesMax: 4,
     },
-    death: { imageSrc: './img/samuraiMack/death.png', framesMax: 6 },
+    deathRight: { imageSrc: './img/samuraiMack/death.png', framesMax: 6 },
+
+    idleLeft: { imageSrc: './img/samuraiMack/idle_edited.png', framesMax: 8 },
+    runLeft: { imageSrc: './img/samuraiMack/run_edited.png', framesMax: 8 },
+    jumpLeft: { imageSrc: './img/samuraiMack/jump_edited.png', framesMax: 2 },
+    fallLeft: { imageSrc: './img/samuraiMack/fall_edited.png', framesMax: 2 },
+    attack1Left: {
+      imageSrc: './img/samuraiMack/attack1_edited.png',
+      framesMax: 6,
+    },
+    attack2Left: {
+      imageSrc: './img/samuraiMack/attack2_edited.png',
+      framesMax: 6,
+    },
+    takeHitLeft: {
+      imageSrc: './img/samuraiMack/take hit - white silhouette_edited.png',
+      framesMax: 4,
+    },
+    deathLeft: { imageSrc: './img/samuraiMack/death_edited.png', framesMax: 6 },
   },
-  attackBox: {
-    offset: { x: 90, y: 50 },
-    width: 160,
+  attackBoxRight: {
+    offset: { x: 70, y: 50 },
+    width: 180,
     height: 60,
   },
+  attackBoxLeft: {
+    offset: { x: -184, y: 50 },
+    width: 180,
+    height: 60,
+  },
+  defaultKey: 'd',
 });
 
 // instantiate a new fighter called player with position 400,100
@@ -92,20 +122,35 @@ const enemy = new Fighter({
   },
   framesHold: 5,
   sprites: {
-    idle: { imageSrc: './img/kenji/idle.png', framesMax: 4 },
-    run: { imageSrc: './img/kenji/run.png', framesMax: 8 },
-    jump: { imageSrc: './img/kenji/jump.png', framesMax: 2 },
-    fall: { imageSrc: './img/kenji/fall.png', framesMax: 2 },
-    attack1: { imageSrc: './img/kenji/attack1.png', framesMax: 4 },
-    attack2: { imageSrc: './img/kenji/attack2.png', framesMax: 4 },
-    takeHit: { imageSrc: './img/kenji/take hit.png', framesMax: 3 },
-    death: { imageSrc: './img/kenji/death.png', framesMax: 7 },
+    idleLeft: { imageSrc: './img/kenji/idle.png', framesMax: 4 },
+    runLeft: { imageSrc: './img/kenji/run.png', framesMax: 8 },
+    jumpLeft: { imageSrc: './img/kenji/jump.png', framesMax: 2 },
+    fallLeft: { imageSrc: './img/kenji/fall.png', framesMax: 2 },
+    attack1Left: { imageSrc: './img/kenji/attack1.png', framesMax: 4 },
+    attack2Left: { imageSrc: './img/kenji/attack2.png', framesMax: 4 },
+    takeHitLeft: { imageSrc: './img/kenji/take hit.png', framesMax: 3 },
+    deathLeft: { imageSrc: './img/kenji/death.png', framesMax: 7 },
+
+    idleRight: { imageSrc: './img/kenji/idle_edited.png', framesMax: 4 },
+    runRight: { imageSrc: './img/kenji/run_edited.png', framesMax: 8 },
+    jumpRight: { imageSrc: './img/kenji/jump_edited.png', framesMax: 2 },
+    fallRight: { imageSrc: './img/kenji/fall_edited.png', framesMax: 2 },
+    attack1Right: { imageSrc: './img/kenji/attack1_edited.png', framesMax: 4 },
+    attack2Right: { imageSrc: './img/kenji/attack2_edited.png', framesMax: 4 },
+    takeHitRight: { imageSrc: './img/kenji/take hit_edited.png', framesMax: 3 },
+    deathRight: { imageSrc: './img/kenji/death_edited.png', framesMax: 7 },
   },
-  attackBox: {
-    offset: { x: -165, y: 60 },
+  attackBoxLeft: {
+    offset: { x: -160, y: 60 },
     width: 165,
     height: 60,
   },
+  attackBoxRight: {
+    offset: { x: 60, y: 60 },
+    width: 165,
+    height: 60,
+  },
+  defaultKey: 'ArrowLeft',
 });
 
 console.log(player);
@@ -137,6 +182,7 @@ function animate() {
   background.update();
   // draw the shop
   shop.update();
+  // add a white haze to the background
   ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   // draw the player using the update method
@@ -150,36 +196,60 @@ function animate() {
 
   // player movement
   if (keys.a.pressed && player.lastKey === 'a') {
-    player.switchSprite('run');
+    player.switchSprite('runLeft');
     player.velocity.x = -5;
   } else if (keys.d.pressed && player.lastKey === 'd') {
-    player.switchSprite('run');
+    player.switchSprite('runRight');
     player.velocity.x = 5;
   } else {
-    player.switchSprite('idle');
+    if (player.lastKey === 'a') {
+      player.switchSprite('idleLeft');
+    } else if (player.lastKey === 'd') {
+      player.switchSprite('idleRight');
+    }
   }
   // player jump
   if (player.velocity.y < 0) {
-    player.switchSprite('jump');
+    if (player.lastKey === 'a') {
+      player.switchSprite('jumpLeft');
+    } else if (player.lastKey === 'd') {
+      player.switchSprite('jumpRight');
+    }
   } else if (player.velocity.y > 0) {
-    player.switchSprite('fall');
+    if (player.lastKey === 'a') {
+      player.switchSprite('fallLeft');
+    } else if (player.lastKey === 'd') {
+      player.switchSprite('fallRight');
+    }
   }
 
   // enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-    enemy.switchSprite('run');
+    enemy.switchSprite('runLeft');
     enemy.velocity.x = -5;
   } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-    enemy.switchSprite('run');
+    enemy.switchSprite('runRight');
     enemy.velocity.x = 5;
   } else {
-    enemy.switchSprite('idle');
+    if (enemy.lastKey === 'ArrowLeft') {
+      enemy.switchSprite('idleLeft');
+    } else if (enemy.lastKey === 'ArrowRight') {
+      enemy.switchSprite('idleRight');
+    }
   }
   // enemy jump
   if (enemy.velocity.y < 0) {
-    enemy.switchSprite('jump');
+    if (enemy.lastKey === 'ArrowLeft') {
+      enemy.switchSprite('jumpLeft');
+    } else if (enemy.lastKey === 'ArrowRight') {
+      enemy.switchSprite('jumpRight');
+    }
   } else if (enemy.velocity.y > 0) {
-    enemy.switchSprite('fall');
+    if (enemy.lastKey === 'ArrowLeft') {
+      enemy.switchSprite('fallLeft');
+    } else if (enemy.lastKey === 'ArrowRight') {
+      enemy.switchSprite('fallRight');
+    }
   }
 
   // detect for collision & enemy gets hit
@@ -203,6 +273,7 @@ function animate() {
     player.isAttacking = false;
   }
 
+  // detect for collision & player gets hit
   if (
     rectangularCollision({
       rectangle1: enemy,
@@ -212,7 +283,7 @@ function animate() {
     enemy.currentFrame === 2
   ) {
     // samurai mack takes damage
-    player.takeHit(5);
+    player.takeHit(6.67);
     enemy.isAttacking = false;
     gsap.to('#playerHealth', {
       width: player.health + '%',
