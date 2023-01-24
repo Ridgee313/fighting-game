@@ -57,3 +57,26 @@ function decreaseTimer() {
     determineWinner({ player, enemy, timerId });
   }
 }
+
+// function to reset all the parts that need resetting
+function resetGame({player, enemy}) {
+  player.image = player.sprites.idleRight.image;
+  player.lastKey = 'd';
+  player.position = {x: 0, y:0};
+  gsap.to('#playerHealth', {
+    width: 100 + '%',
+  });
+  player.health = 100;
+  player.dead = false;
+  enemy.image = enemy.sprites.idleLeft.image;
+  enemy.lastKey  = 'ArrowLeft';
+  enemy.position = {x: canvas.width - 100, y: 0};
+  gsap.to('#enemyHealth', {
+    width: 100 + '%',
+  });
+  enemy.health = 100;
+  enemy.dead = false;
+  timer = 60;
+  document.querySelector('#timer').innerHTML = 60;
+  document.querySelector('#displayText').style.display = 'none';
+}
