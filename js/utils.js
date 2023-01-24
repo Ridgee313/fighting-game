@@ -1,3 +1,7 @@
+// 21/01/2023
+// Ewan Ridge
+// Simple Fighing Game Project - Utilities
+
 // function to handle the collision of 2 rectangles
 // used for detecting the collision between the attack boxes
 function rectangularCollision({ rectangle1, rectangle2 }) {
