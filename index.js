@@ -37,11 +37,11 @@ const shop = new Sprite({
   framesHold: 5,
 });
 
-// instantiate a new fighter called player with position 0,0
+// instantiate a new fighter called player with position 25,0
 // and velocity 0,10
 const player = new Fighter({
   position: {
-    x: 0,
+    x: 25,
     y: 0,
   },
   velocity: {
@@ -106,12 +106,12 @@ const player = new Fighter({
   defaultKey: 'd',
 });
 
-// instantiate a new fighter called player with position 400,100
+// instantiate a new fighter called player with position 924,0
 // and velocity 0,10
 const enemy = new Fighter({
   position: {
-    x: 400,
-    y: 100,
+    x: canvas.width - 100,
+    y: 0,
   },
   velocity: {
     x: 0,
