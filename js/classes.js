@@ -109,7 +109,7 @@ class Fighter extends Sprite {
       offset: attackBoxLeft.offset,
     };
     this.colour = colour;
-    this.isAttacking;
+    this.isAttacking = false;
     this.health = 100;
     this.currentFrame = 0;
     this.framesElapsed = 0;
