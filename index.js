@@ -1,3 +1,7 @@
+// 21/01/2023
+// Ewan Ridge
+// Simple Fighing Game Project
+
 const canvas = document.querySelector('canvas');
 // context is used to draw to the canvas
 const ctx = canvas.getContext('2d');
