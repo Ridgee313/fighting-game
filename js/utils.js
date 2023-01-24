@@ -79,4 +79,5 @@ function resetGame({player, enemy}) {
   timer = 60;
   document.querySelector('#timer').innerHTML = 60;
   document.querySelector('#displayText').style.display = 'none';
+  setTimeout(decreaseTimer, 1000);
 }
