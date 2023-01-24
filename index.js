@@ -319,15 +319,11 @@ window.addEventListener('keydown', (event) => {
       // player keys
       case 'd':
         keys.d.pressed = true;
-        if (player.isAttacking === false) {
-          player.lastKey = 'd';
-        }
+        player.lastKey = 'd';
         break;
       case 'a':
         keys.a.pressed = true;
-        if (player.isAttacking === false) {
-          player.lastKey = 'a';
-        }
+        player.lastKey = 'a';
         break;
       case 'w':
         if (player.velocity.y === 0) {
@@ -345,15 +341,11 @@ window.addEventListener('keydown', (event) => {
       // enemy keys
       case 'ArrowRight':
         keys.ArrowRight.pressed = true;
-        if (enemy.isAttacking === false) {
-          enemy.lastKey = 'ArrowRight';
-        }
+        enemy.lastKey = 'ArrowRight';
         break;
       case 'ArrowLeft':
         keys.ArrowLeft.pressed = true;
-        if (enemy.isAttacking === false) {
-          enemy.lastKey = 'ArrowLeft';
-        }
+        enemy.lastKey = 'ArrowLeft';
         break;
       case 'ArrowUp':
         if (enemy.velocity.y === 0) {
