@@ -256,6 +256,11 @@ function animate() {
     }
   }
 
+  if (player.position.y + player.height <= 458.29 && 
+      player.position.y + player.height + player.velocity >= 458.29 
+      && player.position.x + player.width >= 680 && 
+      player.position.x <= 798)
+  
   // detect for collision & enemy gets hit
   if (
     rectangularCollision({
