@@ -271,7 +271,7 @@ function animate() {
     player.currentFrame === 4
   ) {
     // kenji takes damage
-    enemy.takeHit(25);
+    enemy.takeHit(16.67);
     player.isAttacking = false;
     gsap.to('#enemyHealth', {
       width: enemy.health + '%',
