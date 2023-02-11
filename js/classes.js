@@ -72,7 +72,7 @@ class Fighter extends Sprite {
     sprites,
     attackBoxRight = { offset: {}, width: undefined, height: undefined },
     attackBoxLeft = { offset: {}, width: undefined, height: undefined },
-    defaultKey,
+    lastKey,
   }) {
     super({
       position,
@@ -85,7 +85,7 @@ class Fighter extends Sprite {
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
-    this.lastkey = defaultKey;
+    this.lastkey = lastKey;
     this.attackBoxRight = {
       position: {
         x: this.position.x,
@@ -105,7 +105,7 @@ class Fighter extends Sprite {
       offset: attackBoxLeft.offset,
     };
     this.colour = colour;
-    this.isAttacking;
+    this.isAttacking = false;
     this.health = 100;
     this.currentFrame = 0;
     this.framesElapsed = 0;
@@ -167,6 +167,16 @@ class Fighter extends Sprite {
     //   this.position.y = 180.29;
     // }
     else this.velocity.y += gravity;
+
+    if (
+      this.position.y + this.height <= 327 &&
+      this.position.y + this.height + this.velocity.y >= 327 &&
+      this.position.x + this.width >= 628 &&
+      this.position.x <= 949
+    ) {
+      this.velocity.y = 0;
+      this.position.y = 176.99999999999935;
+    }
   }
 
   attack() {

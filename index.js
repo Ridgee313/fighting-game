@@ -37,8 +37,8 @@ const shop = new Sprite({
 // and velocity 0,10
 const player = new Fighter({
   position: {
-    x: 0,
-    y: 0,
+    x: 25,
+    y: 330.29,
   },
   velocity: {
     x: 0,
@@ -99,15 +99,15 @@ const player = new Fighter({
     width: 180,
     height: 60,
   },
-  defaultKey: 'd',
+  lastKey: 'd',
 });
 
 // instantiate a new fighter called player with position 400,100
 // and velocity 0,10
 const enemy = new Fighter({
   position: {
-    x: 400,
-    y: 100,
+    x: canvas.width - 100,
+    y: 330.29,
   },
   velocity: {
     x: 0,
@@ -150,7 +150,7 @@ const enemy = new Fighter({
     width: 165,
     height: 60,
   },
-  defaultKey: 'ArrowLeft',
+  lastKey: 'ArrowLeft',
 });
 
 console.log(player);
@@ -194,64 +194,67 @@ function animate() {
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
-  // player movement
-  if (keys.a.pressed && player.lastKey === 'a') {
-    player.switchSprite('runLeft');
-    player.velocity.x = -5;
-  } else if (keys.d.pressed && player.lastKey === 'd') {
-    player.switchSprite('runRight');
-    player.velocity.x = 5;
-  } else {
-    if (player.lastKey === 'a') {
-      player.switchSprite('idleLeft');
-    } else if (player.lastKey === 'd') {
-      player.switchSprite('idleRight');
+  // don't allow to move while attacking
+  if (!player.isAttacking) {
+    // player movement
+    if (keys.a.pressed && player.lastKey === 'a') {
+      player.switchSprite('runLeft');
+      player.velocity.x = -5;
+    } else if (keys.d.pressed && player.lastKey === 'd') {
+      player.switchSprite('runRight');
+      player.velocity.x = 5;
+    } else {
+      if (player.lastKey === 'a') {
+        player.switchSprite('idleLeft');
+      } else if (player.lastKey === 'd') {
+        player.switchSprite('idleRight');
+      }
+    }
+    // player jump
+    if (player.velocity.y < 0) {
+      if (player.lastKey === 'a') {
+        player.switchSprite('jumpLeft');
+      } else if (player.lastKey === 'd') {
+        player.switchSprite('jumpRight');
+      }
+    } else if (player.velocity.y > 0) {
+      if (player.lastKey === 'a') {
+        player.switchSprite('fallLeft');
+      } else if (player.lastKey === 'd') {
+        player.switchSprite('fallRight');
+      }
     }
   }
-  // player jump
-  if (player.velocity.y < 0) {
-    if (player.lastKey === 'a') {
-      player.switchSprite('jumpLeft');
-    } else if (player.lastKey === 'd') {
-      player.switchSprite('jumpRight');
+  if (!enemy.isAttacking) {
+    // enemy movement
+    if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
+      enemy.switchSprite('runLeft');
+      enemy.velocity.x = -5;
+    } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+      enemy.switchSprite('runRight');
+      enemy.velocity.x = 5;
+    } else {
+      if (enemy.lastKey === 'ArrowLeft') {
+        enemy.switchSprite('idleLeft');
+      } else if (enemy.lastKey === 'ArrowRight') {
+        enemy.switchSprite('idleRight');
+      }
     }
-  } else if (player.velocity.y > 0) {
-    if (player.lastKey === 'a') {
-      player.switchSprite('fallLeft');
-    } else if (player.lastKey === 'd') {
-      player.switchSprite('fallRight');
-    }
-  }
-
-  // enemy movement
-  if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-    enemy.switchSprite('runLeft');
-    enemy.velocity.x = -5;
-  } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-    enemy.switchSprite('runRight');
-    enemy.velocity.x = 5;
-  } else {
-    if (enemy.lastKey === 'ArrowLeft') {
-      enemy.switchSprite('idleLeft');
-    } else if (enemy.lastKey === 'ArrowRight') {
-      enemy.switchSprite('idleRight');
-    }
-  }
-  // enemy jump
-  if (enemy.velocity.y < 0) {
-    if (enemy.lastKey === 'ArrowLeft') {
-      enemy.switchSprite('jumpLeft');
-    } else if (enemy.lastKey === 'ArrowRight') {
-      enemy.switchSprite('jumpRight');
-    }
-  } else if (enemy.velocity.y > 0) {
-    if (enemy.lastKey === 'ArrowLeft') {
-      enemy.switchSprite('fallLeft');
-    } else if (enemy.lastKey === 'ArrowRight') {
-      enemy.switchSprite('fallRight');
+    // enemy jump
+    if (enemy.velocity.y < 0) {
+      if (enemy.lastKey === 'ArrowLeft') {
+        enemy.switchSprite('jumpLeft');
+      } else if (enemy.lastKey === 'ArrowRight') {
+        enemy.switchSprite('jumpRight');
+      }
+    } else if (enemy.velocity.y > 0) {
+      if (enemy.lastKey === 'ArrowLeft') {
+        enemy.switchSprite('fallLeft');
+      } else if (enemy.lastKey === 'ArrowRight') {
+        enemy.switchSprite('fallRight');
+      }
     }
   }
-
   // detect for collision & enemy gets hit
   if (
     rectangularCollision({
@@ -259,7 +262,8 @@ function animate() {
       rectangle2: enemy,
     }) &&
     player.isAttacking &&
-    player.currentFrame === 4
+    player.currentFrame === 4 &&
+    !gameOver
   ) {
     // kenji takes damage
     enemy.takeHit(10);
@@ -280,7 +284,8 @@ function animate() {
       rectangle2: player,
     }) &&
     enemy.isAttacking &&
-    enemy.currentFrame === 2
+    enemy.currentFrame === 2 &&
+    !gameOver
   ) {
     // samurai mack takes damage
     player.takeHit(6.67);
@@ -306,7 +311,7 @@ animate();
 // and attack with the keyboard
 window.addEventListener('keydown', (event) => {
   // if the player is dead stop moving
-  if (!player.dead) {
+  if (!player.dead || !player.isAttacking) {
     switch (event.key) {
       // player keys
       case 'd':
@@ -328,7 +333,7 @@ window.addEventListener('keydown', (event) => {
     }
   }
   // if the enemy is dead stop moving
-  if (!enemy.dead) {
+  if (!enemy.dead || !enemy.isAttacking) {
     switch (event.key) {
       // enemy keys
       case 'ArrowRight':
