@@ -42,7 +42,7 @@ const shop = new Sprite({
 const player = new Fighter({
   position: {
     x: 25,
-    y: 330.29,
+    y: 0,
   },
   velocity: {
     x: 0,
@@ -111,7 +111,7 @@ const player = new Fighter({
 const enemy = new Fighter({
   position: {
     x: canvas.width - 100,
-    y: 330.29,
+    y: 0,
   },
   velocity: {
     x: 0,
@@ -179,8 +179,6 @@ decreaseTimer();
 
 function animate() {
   window.requestAnimationFrame(animate);
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // draw the background
   background.update();
@@ -319,7 +317,7 @@ window.addEventListener('keydown', (event) => {
     resetGame({ player, enemy });
   }
   // if the player is dead stop moving
-  if (!player.dead || !player.isAttacking) {
+  if (!player.dead && !player.isAttacking) {
     switch (event.key) {
       // player keys
       case 'd':
@@ -341,7 +339,7 @@ window.addEventListener('keydown', (event) => {
     }
   }
   // if the enemy is dead stop moving
-  if (!enemy.dead || !enemy.isAttacking) {
+  if (!enemy.dead && !enemy.isAttacking) {
     switch (event.key) {
       // enemy keys
       case 'ArrowRight':
@@ -383,5 +381,4 @@ window.addEventListener('keyup', (event) => {
       keys.ArrowLeft.pressed = false;
       break;
   }
-  console.log(event.key);
 });
