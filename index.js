@@ -9,6 +9,15 @@ const ctx = canvas.getContext('2d');
 // set the canvas width and height to a 16x9 ratio
 canvas.width = 1024;
 canvas.height = 576;
+// canvas.style.position = 'absolute';
+// canvas.style.left =
+//   window.innerWidth / 2 - canvas.width / 2 < 0
+//     ? 0 + 'px'
+//     : window.innerWidth / 2 - canvas.width / 2 + 'px';
+// canvas.style.top =
+//   window.innerHeight / 2 - canvas.height / 2 < 0
+//     ? 0 + 'px'
+//     : window.innerHeight / 2 - canvas.height / 2 + 'px';
 
 // draw a rectangle of size canvas width by canvas height
 ctx.fillRect(0, 0, canvas.width, canvas.height);

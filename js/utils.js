@@ -71,7 +71,6 @@ function resetGame({ player, enemy }) {
   player.health = 100;
   player.dead = false;
   player.currentFrame = 0;
-  player.framesElapsed = 0;
   enemy.image = enemy.sprites.idleLeft.image;
   enemy.lastKey = 'ArrowLeft';
   enemy.position = { x: canvas.width - 100, y: 0 };
@@ -81,7 +80,6 @@ function resetGame({ player, enemy }) {
   enemy.health = 100;
   enemy.dead = false;
   enemy.currentFrame = 0;
-  enemy.framesElapsed = 0;
   timer = 60;
   document.querySelector('#timer').innerHTML = 60;
   document.querySelector('#displayText').style.display = 'none';
