@@ -1,3 +1,7 @@
+// 21/01/2023
+// Ewan Ridge
+// Simple Fighing Game Project
+
 const canvas = document.querySelector('canvas');
 // context is used to draw to the canvas
 const ctx = canvas.getContext('2d');
@@ -33,7 +37,7 @@ const shop = new Sprite({
   framesHold: 5,
 });
 
-// instantiate a new fighter called player with position 0,0
+// instantiate a new fighter called player with position 25,0
 // and velocity 0,10
 const player = new Fighter({
   position: {
@@ -102,7 +106,7 @@ const player = new Fighter({
   lastKey: 'd',
 });
 
-// instantiate a new fighter called player with position 400,100
+// instantiate a new fighter called player with position 924,0
 // and velocity 0,10
 const enemy = new Fighter({
   position: {
@@ -266,7 +270,7 @@ function animate() {
     !gameOver
   ) {
     // kenji takes damage
-    enemy.takeHit(10);
+    enemy.takeHit(16.67);
     player.isAttacking = false;
     gsap.to('#enemyHealth', {
       width: enemy.health + '%',
@@ -310,6 +314,10 @@ animate();
 // add an event listener for the keydown event so that we can move the player
 // and attack with the keyboard
 window.addEventListener('keydown', (event) => {
+  // if r is pressed reset game
+  if (event.key === 'r') {
+    resetGame({ player, enemy });
+  }
   // if the player is dead stop moving
   if (!player.dead || !player.isAttacking) {
     switch (event.key) {

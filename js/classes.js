@@ -1,3 +1,7 @@
+// 21/01/2023
+// Ewan Ridge
+// Simple Fighing Game Project - Classes
+
 // Sprite class to create player and enemy sprites
 class Sprite {
   // constructor method sets the attributes of the sprite
