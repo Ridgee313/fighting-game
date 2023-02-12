@@ -69,9 +69,13 @@ const player = new Fighter({
       imageSrc: './img/samuraiMack/attack2.png',
       framesMax: 6,
     },
+    // takeHitRight: {
+    //   imageSrc: './img/samuraiMack/take hit - white silhouette.png',
+    //   framesMax: 4,
+    // },
     takeHitRight: {
-      imageSrc: './img/samuraiMack/take hit - white silhouette.png',
-      framesMax: 4,
+      imageSrc: './img/samuraiMack/take hit.png',
+      framesMax: 3,
     },
     deathRight: { imageSrc: './img/samuraiMack/death.png', framesMax: 6 },
 
@@ -87,9 +91,13 @@ const player = new Fighter({
       imageSrc: './img/samuraiMack/attack2_edited.png',
       framesMax: 6,
     },
+    // takeHitLeft: {
+    //   imageSrc: './img/samuraiMack/take hit - white silhouette_edited.png',
+    //   framesMax: 4,
+    // },
     takeHitLeft: {
-      imageSrc: './img/samuraiMack/take hit - white silhouette_edited.png',
-      framesMax: 4,
+      imageSrc: './img/samuraiMack/take hit_edited.png',
+      framesMax: 3,
     },
     deathLeft: { imageSrc: './img/samuraiMack/death_edited.png', framesMax: 6 },
   },
@@ -313,9 +321,11 @@ animate();
 // and attack with the keyboard
 window.addEventListener('keydown', (event) => {
   // if r is pressed reset game
+
   if (event.key === 'r') {
-    resetGame({ player, enemy });
+    resetGame({ player, enemy, timerId });
   }
+
   // if the player is dead stop moving
   if (!player.dead && !player.isAttacking) {
     switch (event.key) {

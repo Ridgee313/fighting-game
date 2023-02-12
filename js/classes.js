@@ -232,6 +232,7 @@ class Fighter extends Sprite {
       )
         return;
       // overides all other animations with the takeHit animation
+
       if (
         (this.image === this.sprites.takeHitLeft.image ||
           this.image === this.sprites.takeHitRight.image) &&
